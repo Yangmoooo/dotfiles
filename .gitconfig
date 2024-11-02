@@ -1,0 +1,7 @@
+[user]
+	name = Yangmoooo
+	email = yangmoooo@outlook.com
+[help]
+	autocorrect = 20
+[alias]
+	cm = commit -m
