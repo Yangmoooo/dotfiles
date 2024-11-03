@@ -1,0 +1,22 @@
+patch:
+  # 仅使用「雾凇拼音」的默认配置，配置此行即可
+  __include: rime_ice_suggestion:/
+  # 以下根据自己所需自行定义
+  __patch:
+    schema_list:
+      - schema: rime_ice   #仅使用雾凇拼音
+    switcher/hotkeys:
+      - Alt+grave
+    switcher/fold_options: false
+    ascii_composer/switch_key/Shift_L: noop
+    ascii_composer/switch_key/Control_L: commit_code
+    key_binder/bindings:
+      # Tab 切换光标至下一个拼音
+      - { when: composing, accept: Tab, send: Shift+Right }
+      # 翻页 , .
+      - { when: paging, accept: comma, send: Page_Up }
+      - { when: has_menu, accept: period, send: Page_Down }
+      # ; 选中第2个候选项，' 选中第3个候选项
+      - { when: has_menu, accept: semicolon, send: 2}
+      - { when: has_menu, accept: apostrophe, send: 3}
+

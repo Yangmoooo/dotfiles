@@ -1,0 +1,6 @@
+---
+BasedOnStyle : Google
+BreakBeforeBraces : Linux
+ColumnLimit : 120
+IndentWidth : 4
+...

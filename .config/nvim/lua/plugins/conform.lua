@@ -8,7 +8,7 @@ return {
       },
       formatters = {
         clang_format = {
-          prepend_args = { "--style=file:/mnt/d/Develop/Resources/clang.format" },
+          prepend_args = { "-style=file:/home/yoko/.config/clangd/clang.format" },
         },
       },
     },
