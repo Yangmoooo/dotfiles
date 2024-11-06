@@ -40,7 +40,7 @@ alias tldr="tldr -L en"
 alias lzg="lazygit"
 alias lzd="sudo lazydocker"
 alias wget="wget --no-hsts"
-alias cfmt="fd -e c -e h -e cpp -x clang-format -i --style=file:$HOME/.config/clangd/clang.format"
+alias cfmt="clang-format -i --style=file:$HOME/.config/clangd/clang.format"
 alias redroid="scrcpy -s localhost:5555 --audio-codec=aac"
 alias caesium="Caesium_Image_Compressor-x86_64_v2.6.0_ubu20_qt66.AppImage &"
 
@@ -60,6 +60,7 @@ eval "$(thefuck --alias fk)"
 # Check that the function `starship_zle-keymap-select()` is defined.
 # xref: https://github.com/starship/starship/issues/3418
 type starship_zle-keymap-select >/dev/null || eval "$(starship init zsh)"
+eval `keychain --eval --quiet ~/.ssh/id_ed25519_github`
 
 
 # Set name of the theme to load --- if set to "random", it will
