@@ -4,4 +4,14 @@
 [help]
 	autocorrect = 20
 [alias]
-	cm = commit -m
+	st = status
+	co = checkout
+	ci = commit
+	br = branch
+	last = log -1 HEAD
+	amend = commit --amend
+	pr = pull --rebase
+	lo = log --oneline
+	lg = log --graph
+[core]
+	editor = micro
