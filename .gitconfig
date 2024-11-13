@@ -5,7 +5,7 @@
 	autocorrect = 20
 [alias]
 	st = status
-	co = checkout
+	sw = switch
 	ci = commit
 	br = branch
 	last = log -1 HEAD
