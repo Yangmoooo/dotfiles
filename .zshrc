@@ -25,6 +25,7 @@ alias sc-disable="systemctl disable"
 alias sc-start="systemctl start"
 alias sc-stop="systemctl stop"
 alias sc-restart="systemctl restart"
+alias sc-isolate="systemctl isolate"
 
 alias rczsh="nvim $HOME/.zshrc"
 alias icat="kitten icat"
