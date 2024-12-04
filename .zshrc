@@ -6,6 +6,7 @@ export HISTFILE=$ZSH/.zsh_history
 export HISTSIZE=10000
 export SAVEHIST=10000
 export _Z_DATA=$HOME/.local/share/z/.z
+export NNN_OPTS="dH"
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border --ansi"
 export FZF_DEFAULT_COMMAND="fd --type file --color=always --strip-cwd-prefix --hidden --follow --exclude .git"
 export MICRO_TRUECOLOR=1
@@ -17,8 +18,17 @@ export CRYPTOGRAPHY_OPENSSL_NO_LEGACY=1
 autoload -Uz compinit && compinit -d "$ZSH_COMPDUMP"
 zstyle ':completion:*' menu select
 setopt completealiases
+# autoload -Uz vcs_info
+# zstyle ':vcs_info:*' enable git
+# zstyle ':vcs_info:*' check-for-changes true
+# zstyle ':vcs_info:*' unstagedstr "*"
+# zstyle ':vcs_info:*' stagedstr "+"
+# zstyle ':vcs_info:*' formats "%b%u%c"
+# precmd() { vcs_info }
+# setopt prompt_subst
+# PROMPT='%F{11}%n%f@%F{9}%m%f %F{14}%~%f %F{13}${vcs_info_msg_0_}%f
+# (%?) $ '
 
-alias sd="sudo"
 alias sc-status="systemctl status"
 alias sc-enable="systemctl enable"
 alias sc-disable="systemctl disable"
