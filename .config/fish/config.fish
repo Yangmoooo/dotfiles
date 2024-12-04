@@ -22,4 +22,3 @@ abbr --add mu micro
 abbr --add lzg lazygit
 
 zoxide init fish | source
-eval (keychain --eval --quiet ~/.ssh/id_ed25519_github ~/.ssh/id_ed25519_venus)
