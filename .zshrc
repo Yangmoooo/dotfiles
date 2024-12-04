@@ -23,10 +23,10 @@ setopt completealiases
 # zstyle ':vcs_info:*' check-for-changes true
 # zstyle ':vcs_info:*' unstagedstr "*"
 # zstyle ':vcs_info:*' stagedstr "+"
-# zstyle ':vcs_info:*' formats "%b%u%c"
+# zstyle ':vcs_info:*' formats "%F{13}%b%f%F{11}%u%c%f"
 # precmd() { vcs_info }
 # setopt prompt_subst
-# PROMPT='%F{11}%n%f@%F{9}%m%f %F{14}%~%f %F{13}${vcs_info_msg_0_}%f
+# PROMPT='%F{9}%n%f@%F{9}%m%f %F{14}%~%f ${vcs_info_msg_0_}
 # (%?) $ '
 
 alias sc-status="systemctl status"
