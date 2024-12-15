@@ -1,7 +1,7 @@
-theme = "catppuccin_macchiato"
+theme = "catppuccin_frappe"
 
 [editor]
-shell = ["zsh", "-c"]
+shell = ["fish", "-c"]
 line-number = "relative"
 idle-timeout = 100
 bufferline = "multiple"
