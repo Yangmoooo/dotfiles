@@ -19,6 +19,9 @@ autoload -Uz compinit && compinit -d "$ZSH_COMPDUMP"
 zstyle ':completion:*' menu select
 setopt completealiases
 
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
 alias sc-status="systemctl status"
 alias sc-enable="systemctl enable"
 alias sc-disable="systemctl disable"
@@ -51,6 +54,8 @@ source $HOME/.zsh/functions.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-you-should-use/you-should-use.plugin.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+
 # rust python nodejs 环境
 source $HOME/.cargo/env
 [ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
