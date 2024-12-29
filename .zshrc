@@ -5,7 +5,6 @@ export ZSH_COMPDUMP=$ZSH/.zcompdump-$HOST
 export HISTFILE=$ZSH/.zsh_history
 export HISTSIZE=10000
 export SAVEHIST=10000
-export _Z_DATA=$HOME/.local/share/z/.z
 export NNN_OPTS="dH"
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border --ansi"
 export FZF_DEFAULT_COMMAND="fd --type file --color=always --strip-cwd-prefix --hidden --follow --exclude .git"
@@ -40,7 +39,6 @@ alias nv="nvim"
 alias mu="micro"
 alias hx="helix"
 alias ncdu="ncdu --color dark"
-alias tldr="tldr -L en"
 alias lzg="lazygit"
 alias lzd="sudo lazydocker"
 alias wget="wget --no-hsts"
@@ -50,7 +48,6 @@ alias caesium="Caesium_Image_Compressor-x86_64_v2.6.0_ubu20_qt66.AppImage &"
 
 # zsh 插件
 source $HOME/.zsh/functions.zsh
-[[ -r /usr/share/z/z.sh ]] && source /usr/share/z/z.sh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-you-should-use/you-should-use.plugin.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -62,7 +59,7 @@ source $HOME/.cargo/env
 conda activate panic
 source /usr/share/nvm/init-nvm.sh
 # 终端工具
-eval "$(thefuck --alias fk)"
+eval "$(zoxide init zsh)"
 # Check that the function `starship_zle-keymap-select()` is defined.
 # xref: https://github.com/starship/starship/issues/3418
 type starship_zle-keymap-select >/dev/null || eval "$(starship init zsh)"
