@@ -1,0 +1,17 @@
+export NLTK_DATA=~/.local/share/nltk_data
+export USE_MODELSCOPE_HUB=1
+
+__proxy_indicator() {
+    if [ -n "$https_proxy" ]; then
+        echo " 🚀"
+    fi
+}
+
+PS1=""
+PS1+='\[\033[01;32m\]\u@\h\[\033[00m\]:'
+PS1+='\[\033[01;34m\]\w\[\033[00m\]'
+PS1+='\[\033[31m\]$(__git_ps1 " (%s)")\[\033[00m\]'
+PS1+='$(__proxy_indicator)'
+PS1+='\n'
+PS1+='\[\033[01;36m\]\$\[\033[00m\] '
+export PS1
