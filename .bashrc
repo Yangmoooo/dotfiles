@@ -63,7 +63,7 @@ px() {
     }
 
     if [ $# -eq 0 ]; then
-        if [ -n "$https_proxy" ]; then
+        if [ -n "$HTTP_PROXY" ]; then
             _px_off
             echo "PROXY off"
         else
