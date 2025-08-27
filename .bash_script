@@ -1,6 +1,0 @@
-. ~/.config/z/z.sh
-. ~/.config/bash/bat-autocomplete.bash
-. ~/.config/bash/rg-autocomplete.bash
-. ~/.config/bash/fd-autocomplete.bash
-. ~/.config/bash/tealdeer-autocomplete.bash
-. ~/.config/bash/git-prompt.sh
