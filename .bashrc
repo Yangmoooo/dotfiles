@@ -22,9 +22,9 @@ else
     alias la="ls -lAGFh"
 fi
 
+alias s="doas"
 alias nv="nvim"
 alias lzg="lazygit"
-alias tldr="tealdeer"
 alias lessj='function _lessjson() { cat "$1" | head -100 | fx; }; _lessjson'
 
 # --- set prompt ---
@@ -88,6 +88,10 @@ px() {
 
 # --- other ---
 
+export SUDO=doas
+
+eval $(thefuck --alias fk)
+
 BASH_CONF_DIR="$HOME/.config/bash"
 
 if [ -d "$BASH_CONF_DIR" ]; then
@@ -95,4 +99,3 @@ if [ -d "$BASH_CONF_DIR" ]; then
         [ -f "$conf" ] && . "$conf"
     done
 fi
-
