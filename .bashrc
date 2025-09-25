@@ -1,6 +1,8 @@
 # --- alias ---
 
 
+export EDITOR="nvim"
+
 PROXY_ADDR="http://127.0.0.1:7897"
 
 alias ..="cd .."
@@ -18,8 +20,6 @@ else
     alias la="ls -lAGFh"
 fi
 
-#alias sudo="doas"
-alias s="sudo"
 alias nv="nvim"
 alias lzg="lazygit"
 alias lessj='function _lessjson() { cat "$1" | head -100 | fx; }; _lessjson'
@@ -79,7 +79,7 @@ unset __mamba_setup
 
 alias mm="micromamba"
 alias pipp="pip --proxy $PROXY_ADDR"
-alias pyserve="python -m http.server -d"
+alias pyserver="python -m http.server -d"
 
 
 # --- nodejs ---
@@ -132,8 +132,6 @@ px() {
 export GITHUB_TOKEN=""
 export GOOGLE_CLOUD_PROJECT=""
 
-#export SUDO=doas
-
 eval $(thefuck --alias fk)
 
 BASH_CONF_DIR="$HOME/.config/bash"
@@ -147,6 +145,4 @@ fi
 if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
 fi
-
-complete -F _command doas
 
