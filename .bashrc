@@ -1,6 +1,4 @@
-# --- alias ---
-
-
+# --- Alias ---
 export EDITOR="nvim"
 
 PROXY_ADDR="http://127.0.0.1:7897"
@@ -11,10 +9,11 @@ alias ....="cd ../../.."
 alias lines="wc -l"
 
 if command -v eza &> /dev/null; then
-    alias ls="eza --group-directories-first"
-    alias ll="eza -l --group-directories-first"
-    alias la="eza -lA --group-directories-first"
-    alias lt="eza -lT --group-directories-first"
+    alias eza="eza --group-directories-first"
+    alias ls="eza"
+    alias ll="eza -l"
+    alias la="eza -lA"
+    alias lt="eza -lT"
 else
     alias ll="ls -lGFh"
     alias la="ls -lAGFh"
@@ -25,12 +24,8 @@ alias lzg="lazygit"
 alias lessj='function _lessjson() { cat "$1" | head -100 | fx; }; _lessjson'
 
 
-# --- set prompt ---
-
-
-__proxy_indicator() {
-    [ -n "$HTTP_PROXY" ] && echo " [PROXY]"
-}
+# --- Prompt ---
+__px_flag() { [ -n "$HTTP_PROXY" ] && echo " [PROXY]" }
 
 export PS1='\
 \[\e[35m\]\u\[\e[0m\]@\
@@ -42,28 +37,21 @@ $(__proxy_indicator)\
 \[\e[32m\]\$\[\e[0m\] '
 
 
-# --- shell opt ---
-
-
-# enhance history
-HISTSIZE=500000
-HISTFILESIZE=500000
+# --- Shell opt ---
+HISTSIZE=50000
+HISTFILESIZE=50000
 shopt -s histappend
 PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 
-# --- rust ---
-
-
+# --- Rust ---
 export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup
 export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
 
-. "$HOME/.cargo/env"
+source "$HOME/.cargo/env"
 
 
-# --- python ---
-
-
+# --- Python ---
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'micromamba shell init' !!
 export MAMBA_EXE='/usr/bin/micromamba';
@@ -82,67 +70,53 @@ alias pipp="pip --proxy $PROXY_ADDR"
 alias pyserver="python -m http.server -d"
 
 
-# --- nodejs ---
-
-
+# --- Nodejs ---
 eval "$(fnm env --use-on-cd --shell bash)"
 
 
-# --- functions ---
-
+# --- Functions ---
+__px_on() {
+    export HTTP_PROXY="$PROXY_ADDR"
+    export HTTPS_PROXY="$PROXY_ADDR"
+    export ALL_PROXY="$PROXY_ADDR"
+}
+__px_off() { unset HTTP_PROXY HTTPS_PROXY ALL_PROXY }
 
 px() {
-    _px_on() {
-        export HTTP_PROXY="$PROXY_ADDR"
-        export HTTPS_PROXY="$PROXY_ADDR"
-        export ALL_PROXY="$PROXY_ADDR"
-    }
-    _px_off() {
-        unset HTTP_PROXY HTTPS_PROXY ALL_PROXY
-    }
-
     if [ $# -eq 0 ]; then
         if [ -n "$HTTP_PROXY" ]; then
-            _px_off
-            echo "PROXY off"
+            __px_off && echo "PROXY off"
         else
-            _px_on
-            echo "PROXY on, at $PROXY_ADDR"
+            __px_on && echo "PROXY on, at $PROXY_ADDR"
         fi
         return 0
     fi
 
-    local proxy_was_already_on=0
-    [ -n "$HTTP_PROXY" ] && proxy_was_already_on=1
+    local proxy_was_off=1
+    [ -n "$HTTP_PROXY" ] && proxy_was_off=0
 
-    _px_cleanup() {
-        [ "$proxy_was_already_on" -eq 0 ] && _px_off
-    }
-    trap _px_cleanup RETURN EXIT INT TERM
-
-    [ "$proxy_was_already_on" -eq 0 ] && _px_on
+    if (( proxy_was_off )); then
+        trap __px_off RETURN EXIT INT TERM
+        _px_on
+    fi
 
     "$@"
 }
 
 
-# --- other ---
-
-
+# --- Other ---
 export GITHUB_TOKEN=""
 export GOOGLE_CLOUD_PROJECT=""
-
-eval $(thefuck --alias fk)
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border --ansi"
+export FZF_DEFAULT_COMMAND="fd --type file --color=always --strip-cwd-prefix --hidden --follow --exclude .git"
 
 BASH_CONF_DIR="$HOME/.config/bash"
-
 if [ -d "$BASH_CONF_DIR" ]; then
     for conf in "$BASH_CONF_DIR"/*.sh; do
         [ -f "$conf" ] && . "$conf"
     done
 fi
+source /usr/share/bash-completion/bash_completion
 
-if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-fi
+eval $(thefuck --alias fk)
 
