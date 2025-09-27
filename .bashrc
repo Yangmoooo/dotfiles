@@ -21,7 +21,7 @@ fi
 
 alias nv="nvim"
 alias lzg="lazygit"
-alias lessj='function _lessjson() { cat "$1" | head -100 | fx; }; _lessjson'
+alias wget="wget --no-hsts"
 
 
 # --- Prompt ---
@@ -42,6 +42,15 @@ HISTSIZE=50000
 HISTFILESIZE=50000
 shopt -s histappend
 PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+BASH_CONF_DIR="$HOME/.config/bash"
+if [ -d "$BASH_CONF_DIR" ]; then
+    for conf in "$BASH_CONF_DIR"/*.sh; do
+        [ -f "$conf" ] && . "$conf"
+    done
+fi
+
+source /usr/share/bash-completion/bash_completion
 
 
 # --- Rust ---
@@ -103,20 +112,32 @@ px() {
     "$@"
 }
 
+bashrc() {
+    local rc="$HOME/.bashrc"
+    "$EDITOR" "$rc"
+
+    if [ $? -ne 0 ]; then
+        echo ".bashrc edit cancelled."
+        return 1
+    fi
+
+    if ! bash -n "$rc"; then
+        echo ".bashrc reload cancelled due to syntax error."
+        return 1
+    fi
+
+    source "$rc"
+    echo ".bashrc reloaded successfully."
+}
+
+lessj() { head -100 "$1" | fx }
+
 
 # --- Other ---
 export GITHUB_TOKEN=""
 export GOOGLE_CLOUD_PROJECT=""
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border --ansi"
 export FZF_DEFAULT_COMMAND="fd --type file --color=always --strip-cwd-prefix --hidden --follow --exclude .git"
-
-BASH_CONF_DIR="$HOME/.config/bash"
-if [ -d "$BASH_CONF_DIR" ]; then
-    for conf in "$BASH_CONF_DIR"/*.sh; do
-        [ -f "$conf" ] && . "$conf"
-    done
-fi
-source /usr/share/bash-completion/bash_completion
 
 eval $(thefuck --alias fk)
 

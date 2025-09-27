@@ -31,21 +31,19 @@ fi
 
 alias nv="nvim"
 alias lzg="lazygit"
-alias zshrc="nvim $HOME/.zshrc"
 alias wget="wget --no-hsts"
 
 
 # --- Prompt ---
-setopt PROMPT_SUBST
+setopt prompt_subst
 
 autoload -Uz vcs_info
-precmd() { vcs_info }
-zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git:*' formats ' (%b)'
-zstyle ':vcs_info:git:*' actionformats ' (%b|%a)'
+precmd_vcs_info() { vcs_info }
+precmd_functions+=( precmd_vcs_info )
+zstyle ':vcs_info:git:*' formats ' %F{yellow}%b'
 
 __px_flag() { [ -n "$HTTP_PROXY" ] && echo " [PROXY]" }
-PROMPT='%F{magenta}%n%f@%F{blue}%m%f %F{cyan}%~%f%F{red}${vcs_info_msg_0_}%f$(__px_flag)
+PROMPT='%F{magenta}%n%f@%F{blue}%m%f %F{cyan}%~%f${vcs_info_msg_0_}%f$(__px_flag)
 %# '
 
 
@@ -62,12 +60,12 @@ ZSH_STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/zsh"
 HISTFILE="$ZSH_STATE_DIR/history"
 HISTSIZE=50000
 SAVEHIST=50000
-setopt HIST_IGNORE_DUPS     # 忽略重复命令
-setopt HIST_IGNORE_ALL_DUPS # 如果新命令和旧命令完全一样，则移除旧的
-setopt HIST_FIND_NO_DUPS    # 搜索历史时不显示重复项
-setopt APPEND_HISTORY       # 追加历史，而不是覆盖
-setopt INC_APPEND_HISTORY   # 立即将命令写入历史文件
-setopt SHARE_HISTORY        # 在所有打开的 shell 间共享历史
+setopt hist_ignore_dups     # 忽略重复命令
+setopt hist_ignore_all_dups # 如果新命令和旧命令完全一样，则移除旧的
+setopt hist_find_no_dups    # 搜索历史时不显示重复项
+setopt append_history       # 追加历史，而不是覆盖
+setopt inc_append_history   # 立即将命令写入历史文件
+setopt share_history        # 在所有打开的 shell 间共享历史
 
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
@@ -137,6 +135,24 @@ px() {
     } "$@"
 }
 
+zshrc() {
+    local rc="$HOME/.zshrc"
+    "$EDITOR" "$rc"
+
+    if [ $? -ne 0 ]; then
+        echo ".zshrc edit cancelled."
+        return 1
+    fi
+
+    if ! zsh -n "$rc"; then
+        echo ".zshrc reload cancelled due to syntax error."
+        return 1
+    fi
+
+    source "$rc"
+    echo ".zshrc reloaded successfully."
+}
+
 lessj() { head -100 "$1" | fx }
 
 
@@ -147,4 +163,5 @@ export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border --ansi"
 export FZF_DEFAULT_COMMAND="fd --type file --color=always --strip-cwd-prefix --hidden --follow --exclude .git"
 
 eval $(thefuck --alias fk)
+
 
