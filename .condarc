@@ -8,5 +8,8 @@ custom_channels:
   conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
   pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
 
+envs_dirs:
+  - ~/.conda/envs
+
 auto_activate_base: false
 show_channel_urls: true

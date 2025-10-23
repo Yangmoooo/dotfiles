@@ -1,6 +1,14 @@
 # --- Basic ---
 export EDITOR="nvim"
 
+export GITHUB_TOKEN=""
+export GOOGLE_CLOUD_PROJECT=""
+
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border --ansi"
+export FZF_DEFAULT_COMMAND="fd --type file --color=always --strip-cwd-prefix --hidden --follow --exclude .git"
+export _Z_CMD="j"
+export _Z_DATA="$HOME/.local/state/z/zdata"
+
 PROXY_ADDR="http://127.0.0.1:7897"
 
 
@@ -22,8 +30,9 @@ if command -v eza &> /dev/null; then
     alias eza="eza --group-directories-first"
     alias ls="eza"
     alias ll="eza -l"
-    alias la="eza -lA"
-    alias lt="eza -lT"
+    alias la="eza -la"
+    alias lt="eza -lT -L 5"
+    alias lta="eza -lTa -L 5 -I .git"
 else
     alias ll="ls -lGFh"
     alias la="ls -lAGFh"
@@ -73,6 +82,7 @@ bindkey '^[[B' history-substring-search-down
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 
 
 # --- Rust ---
@@ -83,20 +93,36 @@ source "$HOME/.cargo/env"
 
 
 # --- Python ---
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/user/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/user/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "/home/user/miniforge3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/user/miniforge3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
 # >>> mamba initialize >>>
-# !! Contents within this block are managed by 'micromamba shell init' !!
-export MAMBA_EXE='/usr/bin/micromamba';
-export MAMBA_ROOT_PREFIX='/home/username/micromamba';
+# !! Contents within this block are managed by 'mamba shell init' !!
+export MAMBA_EXE='/home/user/miniforge3/bin/mamba';
+export MAMBA_ROOT_PREFIX='/home/user/miniforge3';
 __mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__mamba_setup"
 else
-    alias micromamba="$MAMBA_EXE"  # Fallback on help from micromamba activate
+    alias mamba="$MAMBA_EXE"  # Fallback on help from mamba activate
 fi
 unset __mamba_setup
 # <<< mamba initialize <<<
 
-alias mm="micromamba"
+alias condac="conda activate"
+alias condad="conda deactivate"
 alias pipp="pip --proxy $PROXY_ADDR"
 alias pyserver="python -m http.server -d"
 
@@ -157,10 +183,6 @@ lessj() { head -100 "$1" | fx }
 
 
 # --- Other ---
-export GITHUB_TOKEN=""
-export GOOGLE_CLOUD_PROJECT=""
-export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border --ansi"
-export FZF_DEFAULT_COMMAND="fd --type file --color=always --strip-cwd-prefix --hidden --follow --exclude .git"
 
 eval $(thefuck --alias fk)
 

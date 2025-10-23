@@ -2,7 +2,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-vim.g.python3_host_prog = "~/miniconda3/envs/ovo/python.exe"
 
 -- [[ 其他配置 ]]
 require("config.options")

@@ -25,7 +25,7 @@ return {
             -- 确保这些 LSP 服务器已经通过 Mason 安装
             -- :Mason 命令打开界面安装: pyright, black, ruff
             ensure_installed = {
-                "pyright", -- Python LSP 服务器
+                "ruff", -- Python LSP 服务器
                 -- "ruff_lsp", -- 可选的 Ruff LSP (如果你更喜欢 Ruff 的诊断)
                 -- "lua_ls",   -- Lua LSP (用于 Neovim 配置本身)
                 "rust_analyzer", -- Rust LSP 服务器
