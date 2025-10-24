@@ -6,7 +6,6 @@ export GOOGLE_CLOUD_PROJECT=""
 
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border --ansi"
 export FZF_DEFAULT_COMMAND="fd --type file --color=always --strip-cwd-prefix --hidden --follow --exclude .git"
-export _Z_CMD="j"
 export _Z_DATA="$HOME/.local/state/z/zdata"
 
 PROXY_ADDR="http://127.0.0.1:7897"
