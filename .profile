@@ -1,4 +1,8 @@
-[ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH"
+export VISUAL="vim"
+export EDITOR="$VISUAL"
 
-[ -n "$BASH_VERSION" ] && [ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
 
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/bin:$PATH"

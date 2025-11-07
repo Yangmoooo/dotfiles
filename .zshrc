@@ -1,5 +1,8 @@
 # --- Basic ---
-export EDITOR="nvim"
+[ -f "$HOME/.profile" ] && source "$HOME/.profile"
+
+export VISUAL="nvim"
+export EDITOR="$VISUAL"
 
 export GITHUB_TOKEN=""
 export GOOGLE_CLOUD_PROJECT=""
@@ -83,6 +86,15 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 
+__prepend_sudo() {
+    if [[ "$BUFFER" != "sudo "* ]]; then
+        BUFFER="sudo $BUFFER"
+    fi
+    zle end-of-line
+}
+zle -N __prepend_sudo
+bindkey '\e\e' __prepend_sudo
+
 
 # --- Rust ---
 export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup
@@ -135,10 +147,18 @@ __px_on() {
     export HTTP_PROXY="$PROXY_ADDR"
     export HTTPS_PROXY="$PROXY_ADDR"
     export ALL_PROXY="$PROXY_ADDR"
+    export http_proxy="$PROXY_ADDR"
+    export https_proxy="$PROXY_ADDR"
+    export all_proxy="$PROXY_ADDR"
 }
-__px_off() { unset HTTP_PROXY HTTPS_PROXY ALL_PROXY }
+__px_off() { unset HTTP_PROXY HTTPS_PROXY ALL_PROXY http_proxy https_proxy all_proxy }
 
 px() {
+    if [ -z "$PROXY_ADDR" ]; then
+        echo "ERROR: env var PROXY_ADDR not set yet" >&2
+        return 1
+    fi
+
     if [ $# -eq 0 ]; then
         if [ -n "$HTTP_PROXY" ]; then
             __px_off && echo "PROXY off"
@@ -153,29 +173,29 @@ px() {
         return
     fi
 
-    () {
+    (
         trap '__px_off' EXIT
         __px_on
         "$@"
-    } "$@"
+    )
 }
 
 zshrc() {
     local rc="$HOME/.zshrc"
-    "$EDITOR" "$rc"
+    ${EDITOR:-vim} "$rc"
 
     if [ $? -ne 0 ]; then
-        echo ".zshrc edit cancelled."
+        echo "zshrc: edit cancelled"
         return 1
     fi
 
     if ! zsh -n "$rc"; then
-        echo ".zshrc reload cancelled due to syntax error."
+        echo "zshrc: reload cancelled due to syntax error"
         return 1
     fi
 
-    source "$rc"
-    echo ".zshrc reloaded successfully."
+    echo "zshrc: reloading..."
+    exec zsh
 }
 
 lessj() { head -100 "$1" | fx }
