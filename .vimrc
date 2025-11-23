@@ -1,0 +1,80 @@
+" [[ base ]]
+set nocompatible            " 关闭 vi 兼容模式
+filetype plugin indent on   " 启用文件类型检测
+syntax on                   " 启用语法高亮
+set encoding=utf-8          " 强制 UTF-8
+set backspace=indent,eol,start " 修复 Backspace 删除问题
+
+" [[ normal ]]
+" 尝试开启真彩色支持
+" if has('termguicolors')
+"     set termguicolors
+" endif
+colorscheme default
+
+set number                  " 显示行号
+set relativenumber          " 显示相对行号
+set scrolloff=8             " 光标上下保留 8 行
+set sidescrolloff=8         " 光标左右保留 8 列
+set cursorline              " 显示光标所在行
+set ruler                   " 显示光标当前位置
+set nowrap                  " 禁用自动折行
+" set laststatus=2          " 始终显示状态栏
+set mouse=a                 " 启用鼠标
+set ignorecase              " 忽略大小写
+set smartcase               " 智能大小写
+set hlsearch                " 高亮搜索
+set incsearch               " 增量搜索
+" set noshowmode            " 不显示模式
+
+" [[ indent ]]
+set tabstop=4               " Tab 宽度 4
+set shiftwidth=4            " 缩进宽度 4
+set expandtab               " Tab 转空格
+set autoindent              " 自动缩进
+set smartindent             " 智能缩进
+
+" [[ other ]]
+" set undofile              " 启用持久化撤销
+set nobackup                " 禁用备份
+set nowritebackup           " 禁用写时备份
+set noswapfile              " 禁用交换文件
+set autoread                " 自动读取外部修改
+set updatetime=100          " 更新时间 100ms
+set hidden                  " 允许在未保存的缓冲区间切换
+" set signcolumn=yes        " 始终显示符号列
+set colorcolumn=80          " 显示 80 字符提示线
+set clipboard=unnamedplus   " 共享系统剪贴板
+set wildmenu                " 命令行补全
+set showcmd                 " 显示未输完的命令
+
+" [[ map ]]
+" 设置 Leader 键为空格
+let mapleader=" "
+
+" 快速取消搜索高亮 (space + enter)
+noremap <Leader><CR> :nohlsearch<CR>
+
+" 快速保存 (space + w)
+noremap <Leader>w :w<CR>
+
+" 快速退出 (space + q)
+noremap <Leader>q :q<CR>
+
+" 快速保存退出 (space + x)
+noremap <Leader>x :x<CR>
+ 
+" 使用 ctrl + h/j/k/l 在窗口间跳转
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" 缩进后自动重新选中
+vnoremap < <gv
+vnoremap > >gv
+
+" 选中状态下，按 J 或 K 上下移动选中行
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
