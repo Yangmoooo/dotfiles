@@ -43,10 +43,11 @@ set autoread                " 自动读取外部修改
 set updatetime=100          " 更新时间 100ms
 set hidden                  " 允许在未保存的缓冲区间切换
 " set signcolumn=yes        " 始终显示符号列
-set colorcolumn=80          " 显示 80 字符提示线
+set colorcolumn=100         " 显示字符提示线
 set clipboard=unnamedplus   " 共享系统剪贴板
 set wildmenu                " 命令行补全
 set showcmd                 " 显示未输完的命令
+set viminfo+=n~/.cache/vim/viminfo  " viminfo 位置
 
 " [[ map ]]
 " 设置 Leader 键为空格
