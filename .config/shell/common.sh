@@ -19,7 +19,9 @@ alias sc-stop="systemctl stop"
 alias sc-restart="systemctl restart"
 alias sc-isolate="systemctl isolate"
 
-PROXY_ADDR="http://127.0.0.1:17897"
+stty -ixon  # 禁用终端的流控功能，避免与 tmux 的 ctrl+s prefix 混淆
+
+PROXY_ADDR="http://127.0.0.1:7897"
 __px_flag() { [ -n "$HTTP_PROXY" ] && echo " [PROXY]" }
 __px_off() { unset HTTP_PROXY HTTPS_PROXY ALL_PROXY http_proxy https_proxy all_proxy }
 __px_on() {
