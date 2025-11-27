@@ -1,50 +1,50 @@
 [user]
-	name = Yangmoooo
-	email = yangmoooo@outlook.com
+    name = Yangmoooo
+    email = yangmoooo@outlook.com
 
 # [http]
-# 	proxy = http://127.0.0.1:7897
+#     proxy = http://127.0.0.1:7897
 
 # [https]
-# 	proxy = http://127.0.0.1:7897
+#     proxy = http://127.0.0.1:7897
 
 [help]
-	autocorrect = 2
+    autocorrect = 2
 
 [core]
-	editor = vim
+    editor = vim
 
 [init]
-	defaultBranch = main
+    defaultBranch = main
 
 [color]
-	ui = auto
+    ui = auto
 
 [pull]
-	rebase = true
+    rebase = true
 
 [credential]
-	helper = cache --timeout=3600
+    helper = cache --timeout=3600
 
 [alias]
-	# 基础快捷指令
-	co = checkout
-	br = branch
-	sw = switch
-	ci = commit
-	st = status
-	s = status -s
-	f = fetch
-	rs = remote show
+    # 基础快捷指令
+    co = checkout
+    br = branch
+    sw = switch
+    ci = commit
+    st = status
+    s = status -s
+    f = fetch
+    rs = remote show
 
-	# 切换到新分支
-	new = switch -c
+    # 切换到新分支
+    new = switch -c
 
-	# 增强版 log
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    # 增强版 log
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
-	# 查看所有分支
-	bra = branch -avv
+    # 查看所有分支
+    bra = branch -avv
 
     # 撤销
     unstage = restore --staged .
@@ -53,8 +53,10 @@
 
     # 修改
     amend = commit --amend --no-edit
-
-    workflow = "!f() { \
+        
+    # 其他
+    ignore = "!gi() { curl -sL https://www.toptal.com/developers/gitignore/api/$@ ;}; gi"
+    workflow = "!wf() { \
         C_BLUE='\\e[34m'; \
         C_GREEN='\\e[32m'; \
         C_YELLOW='\\e[33m'; \
