@@ -4,12 +4,12 @@
     "source": "$HOME/.config/fastfetch/copland-logo.txt",
     "type": "file",
     "color": {
-      "1": "red",
+      "1": "magenta",
       "2": "yellow"
     }
   },
   "display": {
-    "color": "green"
+    "color": "blue"
   },
   "modules": [
     "title",
