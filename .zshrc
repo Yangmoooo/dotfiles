@@ -7,7 +7,6 @@ export EDITOR="$VISUAL"
 export LESSHISTFILE="$HOME/.local/state/lesshst"
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border --ansi"
 export FZF_DEFAULT_COMMAND="fd --type file --color=always --strip-cwd-prefix --hidden --follow --exclude .git"
-export _Z_DATA="$HOME/.local/state/z/zdata"
 
 
 # --- alias ---
@@ -45,7 +44,6 @@ setopt share_history        # 在所有打开的 shell 间共享历史
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
-source "$HOME/.config/shell/z.sh"
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
@@ -115,5 +113,6 @@ lessj() { head -100 "$1" | fx }
 
 
 # --- other ---
-eval $(thefuck --alias fk)
+eval "$(zoxide init zsh)"
+eval "$(thefuck --alias fk)"
 
