@@ -7,10 +7,10 @@ set backspace=indent,eol,start " 修复 Backspace 删除问题
 
 " [[ normal ]]
 " 尝试开启真彩色支持
-" if has('termguicolors')
-"     set termguicolors
-" endif
-colorscheme default
+if has('termguicolors')
+    set termguicolors
+endif
+colorscheme dracula
 
 set number                  " 显示行号
 set relativenumber          " 显示相对行号
@@ -47,7 +47,7 @@ set colorcolumn=100         " 显示字符提示线
 set clipboard=unnamedplus   " 共享系统剪贴板
 set wildmenu                " 命令行补全
 set showcmd                 " 显示未输完的命令
-set viminfo+=n~/.cache/vim/viminfo  " viminfo 位置
+set viminfo+=n~/.vim/viminfo  " viminfo 位置
 
 " [[ map ]]
 " 设置 Leader 键为空格
