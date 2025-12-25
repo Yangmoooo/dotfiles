@@ -3,6 +3,10 @@ export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 export VISUAL="vim"
 export EDITOR="$VISUAL"
 
+export GTK_IM_MODULE=fcitx5
+export QT_IM_MODULE=fcitx5
+export XMODIFIERS=@im=fcitx5
+
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
