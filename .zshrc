@@ -18,6 +18,7 @@ alias lt="eza -lT -L 5"
 alias lta="eza -lTa -L 5 -I .git"
 alias nv="nvim"
 alias lzg="lazygit"
+alias lzd="lazydocker"
 alias wget="wget --no-hsts"
 
 
