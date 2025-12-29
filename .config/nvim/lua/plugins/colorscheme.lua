@@ -1,15 +1,19 @@
 return {
-    {
-        "Mofiqul/dracula.nvim",
-        lazy = false,
-        priority = 1000,
-        config = function()
-            vim.cmd([[colorscheme dracula]])
-        end,
+  {
+    "Mofiqul/dracula.nvim",
+    opts = {
+      overrides = function(colors)
+        return {
+          NormalFloat = { bg = colors.nontext },
+        }
+      end,
     },
-    {
-        "loctvl842/monokai-pro.nvim",
-        lazy = true,
-        priority = 1000,
+  },
+
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "dracula",
     },
+  },
 }
