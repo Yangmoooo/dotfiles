@@ -45,6 +45,7 @@ setopt share_history        # 在所有打开的 shell 间共享历史
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
+source "$HOME/.config/shell/git-prompt.sh"
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
@@ -66,12 +67,19 @@ bindkey -M vicmd '\e\e' __sudo_toggle
 
 # --- prompt ---
 setopt prompt_subst
-autoload -Uz vcs_info
-precmd_vcs_info() { vcs_info }
-precmd_functions+=( precmd_vcs_info )
-zstyle ':vcs_info:git:*' formats ' %F{yellow}%b'
-PROMPT='%F{magenta}%n%f@%F{blue}%m%f %F{cyan}%~%f${vcs_info_msg_0_}%f$(__px_flag)
+export GIT_PS1_SHOWDIRTYSTATE=true     # *: Unstaged, +: Staged
+export GIT_PS1_SHOWUNTRACKEDFILES=true # %: Untracked
+export GIT_PS1_SHOWSTASHSTATE=true     # $: Stashed
+export GIT_PS1_SHOWUPSTREAM="auto"     # =: Up to date, <: Behind, >: Ahead, <>: Diverged
+export GIT_PS1_SHOWCOLORHINTS=true
+update_git_prompt() {
+    local pre='%F{magenta}%n%f@%F{blue}%m%f %F{cyan}%~%f'
+    local post='%f$(__px_flag)
 %# '
+    local fmt=' %s'
+    __git_ps1 "$pre" "$post" "$fmt"
+}
+precmd_functions+=( update_git_prompt )
 
 
 # --- Rust ---
